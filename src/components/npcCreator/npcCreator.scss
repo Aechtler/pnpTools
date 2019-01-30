@@ -1,0 +1,35 @@
+.npcCreator {
+    &__tab {
+        cursor: pointer;
+        
+        &--inactive {
+            color: #c1c1c1;
+        }
+    }
+
+    &__row {
+        padding: 20px 0 20px 0;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__col {
+        width: span(2 of 12);
+        padding-right: 10px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        &__row {
+            flex-direction: column;
+        }
+
+        &__col {
+            width: span(12 of 12);
+            margin-bottom: 10px;
+        }
+
+        &__cta {
+            width: 100%;
+        }
+    }
+}
