@@ -9,7 +9,7 @@
                             <font-awesome-icon v-if="players.length" icon="skull" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'user'}" @click="selectTab('enemy')" /> Add Player
                         </h1>
                         <div class="npcCreator__row">
-                            <div class="npcCreator__col" v-if="npcTab === 'user'"><input v-model="npc.name" class="form-control" type="text" placeholder="Name" /></div>
+                            <div class="npcCreator__col npcCreator__col--name" v-if="npcTab === 'user'"><input v-model="npc.name" class="form-control" type="text" placeholder="Name" /></div>
                             <div class="npcCreator__col" v-if="npcTab === 'user'"><input v-model.number="npc.kk" class="form-control" type="number" placeholder="KK" /></div>
                             <div class="npcCreator__col" v-if="npcTab === 'enemy'"><input v-model.number="npc.at" class="form-control" type="number" min="1" max="19" placeholder="AT" /></div>
                             <div class="npcCreator__col" v-if="npcTab === 'enemy'"><input v-model.number="npc.pa" class="form-control" type="number" min="1" max="19" placeholder="PA" /></div>
@@ -30,7 +30,6 @@
         </div>
 
         <div class="player-list" v-if="players.length">
-            <h2 class="player-list__title">Players</h2>
             <div class="player-list__player player-list-player" 
                 v-for="player in players" 
                 :key="player.id" 
@@ -67,9 +66,12 @@
 
                             <div class="input-group / player-list-player-col-item__le-field">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><font-awesome-icon icon="heart" /></span>
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <font-awesome-icon icon="heart" v-if="player.le > 0" />
+                                        <font-awesome-icon icon="heart-broken" v-if="player.le == 0" />
+                                    </span>
                                 </div>
-                                <input :disabled="!starts" class="form-control" type="number" v-model="player.le" aria-describedby="basic-addon1"/>
+                                <input :disabled="!starts" class="form-control" type="number" v-model="player.le" v-on:keyup="updatePlayersCookie()" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
@@ -110,8 +112,7 @@
                 activePlayer: {},
                 starts: false,
                 npc: {},
-                npcTab: 'user',
-                max: 2
+                npcTab: 'user'
             };
         },
         methods: {
@@ -179,6 +180,7 @@
                 this.setDefaultAttributes();
                 this.players = this.clone(this.buPlayers);
                 this.getActivePlayer();
+                this.updatePlayersCookie();
             },
             removeAllNPC () {
                 this.players = _.remove(this.players, function(player) {
@@ -190,7 +192,7 @@
             },
             stopBattle () {
                 this.setDefaultAttributes();
-                this.players = this.clone(this.buPlayers);
+                this.players = this.clone(JSON.parse(this.$cookie.get('initPlayers')));
                 this.starts = false;
             },
             isValidNPC () {
@@ -303,7 +305,6 @@
             },
             checkMaxLength (length, field, oldValue) {
                 if (new String(oldValue).length >= length) {
-                    console.log(this.npc[field]);
                     this.npc[field] = oldValue;
                 }
             },

@@ -7,10 +7,10 @@ import VueCookie from 'vue-cookie'
 // font awesome settings
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSkullCrossbones, faPlus, faSkull, faFlag, faUser, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faUserMinus, faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import { faSkullCrossbones, faPlus, faSkull, faFlag, faUser, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faPlus, faSkull, faFlag, faUser, faSkullCrossbones, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faUserMinus, faUserPlus)
+library.add(faPlus, faSkull, faFlag, faUser, faSkullCrossbones, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueCookie);

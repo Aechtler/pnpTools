@@ -6931,7 +6931,7 @@ a.text-dark:hover, a.text-dark:focus {
   text-align: center; }
 
 .player-list {
-  margin-bottom: 20px; }
+  margin-bottom: 30px; }
   .player-list__title, .player-list-cta {
     padding: 0 15px 0 15px; }
   .player-list-player {
@@ -7024,6 +7024,8 @@ a.text-dark:hover, a.text-dark:focus {
 .npcCreator__col {
   width: 15.2542372881%;
   padding-right: 10px; }
+  .npcCreator__col--name {
+    width: 23.7288135593%; }
 
 @media only screen and (max-width: 768px) {
   .npcCreator__row {

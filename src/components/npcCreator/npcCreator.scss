@@ -16,6 +16,10 @@
     &__col {
         width: span(2 of 12);
         padding-right: 10px;
+
+        &--name {
+            width: span(3 of 12);
+        }
     }
 
     @media only screen and (max-width: 768px) {
