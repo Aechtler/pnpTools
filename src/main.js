@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import VueCookie from 'vue-cookie'
 
-// font awesome settings
+import 'bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSkullCrossbones, faPlus, faSkull, faFlag, faUser, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken} from '@fortawesome/free-solid-svg-icons'

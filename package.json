@@ -30,7 +30,8 @@
     "load-grunt-tasks": "^3.4.1",
     "node-sass": "^4.11.0",
     "popper.js": "^1.14.6",
-    "susy": "^3.0.5"
+    "susy": "^3.0.5",
+    "sass-loader": "^7.1.0"
   },
   "browserslist": [
     "> 1%",

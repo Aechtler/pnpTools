@@ -57,7 +57,11 @@
 
         &-col-item {
             &__le-field {
-                width: auto;
+                width: auto !important;
+
+                input {
+                    padding: 0 0 0 10px;
+                }
             }
 
             &__remove-button {
@@ -145,15 +149,8 @@
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-    
-                // change bootstrap classes
-                .input_group {
-                    width: auto;
-                }
-    
-                input {
-                    padding: 0 0 0 10px;
-                }
+
+
             }
         }
     }
