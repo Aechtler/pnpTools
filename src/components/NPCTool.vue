@@ -7,7 +7,7 @@
                     <font-awesome-icon v-if="players.length" icon="skull" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'user'}" @click="selectTab('enemy')" /> Add Player
                 </h1>
                 <div class="npcCreator__row">
-                    <div class="npcCreator__col npcCreator__col--name" v-if="npcTab === 'user'"><input v-model="npc.name" class="form-control" type="text" placeholder="Name" /></div>
+                    <div class="npcCreator__col npcCreator__col--name"><input v-model="npc.name" class="form-control" type="text" placeholder="Name" /></div>
                     <div class="npcCreator__col" v-if="npcTab === 'user'"><input v-model.number="npc.kk" class="form-control" type="number" placeholder="KK" /></div>
                     <div class="npcCreator__col" v-if="npcTab === 'enemy'"><input v-model.number="npc.at" class="form-control" type="number" min="1" max="19" placeholder="AT" /></div>
                     <div class="npcCreator__col" v-if="npcTab === 'enemy'"><input v-model.number="npc.pa" class="form-control" type="number" min="1" max="19" placeholder="PA" /></div>
@@ -66,7 +66,7 @@
                 var players = this.playersProp;
                 var isEnemy = this.npcTab === 'enemy';
                 var npcCound = dao.filterPlayers(players, true).length + 1;
-                var name = isEnemy ? "NPC (" + npcCound + ")" : this.npc.name
+                var name = isEnemy ? (this.npc.name ? this.npc.name : "NPC") + " (" + npcCound + ")" : this.npc.name
                 var id = !players.length ? 1 : players[players.length -1].id + 1;
                 var npc = {
                     "id": id,
