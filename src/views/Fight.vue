@@ -15,8 +15,10 @@
                     <div class="player-list-player__col player-list-player__col--status">
                         <div class="player-list-player__col-item">
                             <font-awesome-icon v-if="checkStatus('isNPCActive', player)" icon="skull" />
-                            <font-awesome-icon v-if="checkStatus('isPlayerInLine', player)" icon="user" />
                             <font-awesome-icon v-if="checkStatus('isPlayerNotInLine', player)" icon="user" />
+                            <font-awesome-icon v-if="checkStatus('isPlayerInLine', player)" icon="user" />
+                            <font-awesome-icon v-if="checkStatus('isHurtPlayerNotInLine', player)" icon="user-injured" />
+                             <font-awesome-icon v-if="checkStatus('isHurtPlayerInLine', player)" icon="user-injured" />
                             <font-awesome-icon v-if="checkStatus('isPlayerDead', player)" icon="skull-crossbones" />
                         </div>
                     </div>
@@ -30,12 +32,26 @@
                         <div class="player-list-player__col-item">PA: {{player.fightAttributes.pa}}</div>
                     </div>
                 </div>
-                <div class="player-list-player__row player-list-player__row--second">
+                <div class="player-list-player__row">
+                    <div class="player-list-player__col player-list-player__col--ini">
+                        <div class="player-list-player__col-item  player-list-player-col-item">
+                            <div class="input-group / player-list-player-col-item__ini-field">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <font-awesome-icon icon="fist-raised" />
+                                    </span>
+                                </div>
+                                <input class="form-control" type="number" v-model="player.fightAttributes.ini" aria-describedby="basic-addon1"/>
+                            </div>
+                        </div>
+                    </div>
                     <div class="player-list-player__col player-list-player__col--le">
                         <div class="player-list-player__col-item  player-list-player-col-item">
                             <button type="button" class="btn btn-light / player-list-player-col-item__remove-button" v-if="!starts" @click="dropPlayer(player)">
                                 <font-awesome-icon icon="user-times" />
                             </button>
+
+                            <font-awesome-icon class="player-list-player-col-item__reset" v-if="starts && userIsModified(player)" @click="resetPlayer(player)" icon="sync-alt" />
 
                             <div class="input-group / player-list-player-col-item__le-field">
                                 <div class="input-group-prepend">
@@ -59,7 +75,7 @@
         <div class="player-list-cta" v-if="players.length">
             <div v-if="!starts">
                 <button type="button" class="btn" :class="{'btn-primary': players.length > 1, 'btn-secondary': players.length <= 1}" @click="startBattle()" :disabled="players.length < 2">
-                    Lets Fight! <font-awesome-icon icon="fist-raised" />
+                    Start Battle! <font-awesome-icon icon="dice-d20" />
                 </button>
                 <button type="button" class="btn btn-secondary" @click="removeAllNPC()" v-if="hasPlayers(true)"><font-awesome-icon icon="sync-alt" /></button>
             </div>
@@ -74,8 +90,8 @@
 </template>
 
 <script>
-    import NPCTool from '@/components/npcTool/NPCTool.vue';
-    import Round from '@/components/round/Round.vue';
+    import NPCTool from '@/components/NPCTool.vue';
+    import Round from '@/components/Round.vue';
     import dao from "@/mixins/players-dao.js";
 
     export default {
@@ -163,10 +179,18 @@
                 this.getActivePlayer();
                 this.updatePlayersCookie();
             },
-            hasPlayers(npc) {
+            resetPlayer (player) {
+                var buPlayer = this.dao.findPlayer(this.buPlayers, player) || player;
+                var clonedBuPlayer = this.clone(buPlayer);
+
+                this.players = _.map(this.players, function (retPlayer){
+                    return retPlayer.id === player.id ? clonedBuPlayer : retPlayer;
+                });
+            },
+            hasPlayers (npc) {
                 return this.dao.filterPlayers(this.players, true).length;
             },
-            updatePlayersCookie() {
+            updatePlayersCookie () {
                 this.$cookie.set('initPlayers', JSON.stringify(dao.filterPlayers(this.players)), 1);
             },
             removeAllNPC () {
@@ -181,10 +205,16 @@
                 this.players = this.clone(JSON.parse(this.$cookie.get('initPlayers')));
                 this.starts = false;
             },
+            userIsModified (player) {
+                var buPlayer = this.dao.findPlayer(this.buPlayers, player) || player;
+                return buPlayer.le != player.le; 
+            },
             checkStatus (status, player) {
                 var isPlayerNPC = player.npc;
                 var isPlayerAlive = player.le > 0;
-                var isPlayerActive = this.activePlayer.id === player.id;
+                var isPlayerActive = this.activePlayer.id == player.id;
+                var buPlayer = this.dao.findPlayer(this.buPlayers, player) || player;
+                var isPlayerHurt = parseInt(player.le) < parseInt(buPlayer.le);
 
                 switch(status) {
                     case 'isNPCActive':
@@ -194,10 +224,16 @@
                         return !isPlayerAlive;
                         break;
                     case 'isPlayerInLine':
-                        return !isPlayerNPC && isPlayerAlive && isPlayerAlive;
+                        return !isPlayerNPC && isPlayerActive && isPlayerAlive && !isPlayerHurt;
+                        break;
+                    case 'isHurtPlayerInLine':
+                        return !isPlayerNPC && isPlayerActive && isPlayerAlive && isPlayerHurt;
                         break;
                     case 'isPlayerNotInLine':
-                        return !isPlayerNPC && !isPlayerAlive && isPlayerAlive;
+                        return !isPlayerNPC && !isPlayerActive && isPlayerAlive && !isPlayerHurt;
+                        break;
+                    case 'isHurtPlayerNotInLine':
+                        return !isPlayerNPC && !isPlayerActive && isPlayerAlive && isPlayerHurt;
                         break;
                     case 'isPlayerActive':
                         return isPlayerActive;

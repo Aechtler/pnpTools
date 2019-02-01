@@ -11,8 +11,8 @@
 <style lang="scss">
   @media only screen and (max-width: 768px) {
       .pnp-container {
-          padding-left: 0;
-          padding-right: 0;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
       }
   }
 

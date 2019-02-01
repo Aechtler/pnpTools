@@ -14,9 +14,7 @@
       color: #999; }
     .player-list-player__row {
       display: flex;
-      width: 74.5762711864%; }
-      .player-list-player__row--second {
-        width: 23.7288135593%; }
+      width: 49.1525423729%; }
     .player-list-player__col {
       height: 50px;
       position: relative; }
@@ -27,7 +25,10 @@
       .player-list-player__col--at, .player-list-player__col--pa {
         width: 15.2542372881%; }
       .player-list-player__col--le {
-        width: 100%;
+        width: 66.1016949153%;
+        margin-right: 10px; }
+      .player-list-player__col--ini {
+        width: 32.2033898305%;
         margin-right: 10px; }
     .player-list-player-col-item__le-field {
       width: auto !important; }
@@ -36,6 +37,13 @@
     .player-list-player-col-item__remove-button {
       float: right;
       margin-left: 10px; }
+    .player-list-player-col-item__reset {
+      position: absolute;
+      right: 20px;
+      z-index: 10000;
+      top: 11px;
+      color: gray;
+      cursor: pointer; }
   @media only screen and (max-width: 768px) {
     .player-list__title {
       margin-bottom: 20px; }
@@ -63,7 +71,9 @@
         width: auto;
         padding: 0 10px 0 10px; }
       .player-list-player__col--le {
-        width: 91.5254237288%;
+        width: 57.6271186441%; }
+      .player-list-player__col--ini {
+        width: 32.2033898305%;
         margin-left: 6.7796610169%; } }
   @media only screen and (min-width: 769px) {
     .player-list-cta .btn {
@@ -101,5 +111,29 @@
     margin-bottom: 10px; }
   .npcCreator__cta {
     width: 100%; } }
+
+.about__title {
+  margin-bottom: 30px; }
+
+.about__row {
+  display: flex; }
+
+.about__col {
+  width: 66.1016949153%;
+  line-height: 1.8em;
+  margin-bottom: 20px; }
+  .about__col--image {
+    padding: 0 0 0 40px;
+    width: 32.2033898305%; }
+
+.about__image {
+  width: 100%; }
+
+@media only screen and (max-width: 768px) {
+  .about__row {
+    flex-direction: column; }
+  .about__col, .about__col--image {
+    width: 100%;
+    padding: 0; } }
 
 /*# sourceMappingURL=app.css.map */

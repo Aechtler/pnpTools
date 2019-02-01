@@ -26,11 +26,7 @@
 
         &__row {
             display: flex; 
-            width: span(9 of 12);
-    
-            &--second {
-                width: span(3 of 12); 
-            }
+            width: span(6 of 12);
         }
     
         &__col {
@@ -50,7 +46,11 @@
             }
     
             &--le {
-                width: span(12 of 12);
+                width: span(8 of 12);
+                margin-right: 10px;
+            }
+            &--ini {
+                width: span(4 of 12);
                 margin-right: 10px;
             }
         }
@@ -67,6 +67,15 @@
             &__remove-button {
                 float: right;
                 margin-left: 10px;
+            }
+
+            &__reset {
+                position: absolute;
+                right: 20px;
+                z-index: 10000;
+                top: 11px;
+                color: gray;
+                cursor: pointer;
             }
         }
     }
@@ -124,7 +133,11 @@
                 }
 
                 &--le {
-                    width: span(11 of 12);
+                    width: span(7 of 12);
+                }
+
+                &--ini {
+                    width: span(4 of 12);
                     margin-left: span(1 of 12);
                 }
             }

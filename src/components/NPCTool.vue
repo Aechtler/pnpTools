@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import dao from "../../mixins/players-dao.js";
+    import dao from "@/mixins/players-dao.js";
 
     export default {
         props: {

@@ -1,0 +1,35 @@
+.about {
+    &__title {
+      margin-bottom: 30px;
+    }
+
+    &__row {
+        display: flex;
+    }
+
+    &__col {
+      width: span(8 of 12);
+      line-height: 1.8em;
+      margin-bottom: 20px;
+
+      &--image {
+        padding: 0 0 0 40px;
+        width: span(4 of 12);
+      }
+    }
+
+    &__image {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      &__row {
+        flex-direction: column;
+      }
+
+      &__col, &__col--image {
+        width: span(12 of 12);
+        padding: 0;
+      }
+    }
+  }
