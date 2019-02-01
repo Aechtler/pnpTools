@@ -65,9 +65,9 @@
             addNPC () {
                 var players = this.playersProp;
                 var isEnemy = this.npcTab === 'enemy';
-                var npcCound = dao.filterPlayers(true, this.players).length + 1;
+                var npcCound = dao.filterPlayers(players, true).length + 1;
                 var name = isEnemy ? "NPC (" + npcCound + ")" : this.npc.name
-                var id = !this.players.length ? 1 : this.players[this.players.length -1].id + 1;
+                var id = !players.length ? 1 : players[players.length -1].id + 1;
                 var npc = {
                     "id": id,
                     "name": name,

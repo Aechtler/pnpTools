@@ -85,7 +85,8 @@
       .player-list-player__col-item {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%); } }
+        transform: translateY(-50%);
+        width: 100%; } }
 
 .npcCreator__tab {
   cursor: pointer; }
