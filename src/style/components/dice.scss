@@ -1,0 +1,40 @@
+.dice {
+    width: span(3 of 12);
+    margin-right: 10px;
+
+    &__dice {
+        cursor: pointer;
+
+        &:not(:first-child) {
+            margin-left: 10px;
+        }
+
+        &--d6 {
+            color: #28a745;
+        }
+
+        &--d20 {
+            color: #28a745;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        width: span(12 of 12);
+        margin-bottom: 20px;
+
+        .input-group-text {
+            font-size: 150%;
+
+            &:not(:first-child) {
+                margin-left: 30px;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 769px) {
+        .input-group-text {
+            border-bottom-left-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+        }
+    }
+}

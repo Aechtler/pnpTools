@@ -1,7 +1,7 @@
 <template>
     <div>
         <NPCTool v-if="!starts" :players="players" />
-        <Round v-else :round-count="roundCount"></Round>
+        <Round v-else :round-count="roundCount" />
 
         <div class="player-list" v-if="players.length">
             <div class="player-list__player player-list-player" 
@@ -73,18 +73,16 @@
         </div>
         
         <div class="player-list-cta" v-if="players.length">
-            <div v-if="!starts">
-                <button type="button" class="btn" :class="{'btn-primary': players.length > 1, 'btn-secondary': players.length <= 1}" @click="startBattle()" :disabled="players.length < 2">
-                    Start Battle! <font-awesome-icon icon="dice-d20" />
-                </button>
-                <button type="button" class="btn btn-secondary" @click="removeAllNPC()" v-if="hasPlayers(true)"><font-awesome-icon icon="sync-alt" /></button>
-            </div>
+            <button v-if="!starts" type="button" class="btn" :class="{'btn-primary': players.length > 1, 'btn-secondary': players.length <= 1}" @click="startBattle()" :disabled="players.length < 2">
+                Start Battle! <font-awesome-icon icon="dice-d20" />
+            </button>
+            <button v-if="!starts && hasPlayers(true)" type="button" class="btn btn-secondary" @click="removeAllNPC()"><font-awesome-icon icon="sync-alt" /></button>
 
-            <div v-if="starts">
-                <button type="button" class="btn btn-secondary  / player-list-cta__option" @click="reset()"><font-awesome-icon icon="redo-alt" /></button>
-                <button type="button" class="btn btn-secondary / player-list-cta__option" @click="stopBattle()"><font-awesome-icon icon="stop" /></button>
-                <button type="button" class="btn btn-primary" @click="nextRound(true)">Next <font-awesome-icon icon="caret-right" /></button>
-            </div>
+            <button v-if="starts" type="button" class="btn btn-secondary  / player-list-cta__option" @click="reset()"><font-awesome-icon icon="redo-alt" /></button>
+            <button v-if="starts" type="button" class="btn btn-secondary / player-list-cta__option" @click="stopBattle()"><font-awesome-icon icon="stop" /></button>
+            <button v-if="starts" type="button" class="btn btn-success" :class="{'player-list-cta__dice': showDice}" @click="toggleDiceView()"><font-awesome-icon icon="dice" /></button>
+            <Dice v-if="starts && showDice" />
+            <button v-if="starts" type="button" class="btn btn-primary" @click="nextRound(true)">Next <font-awesome-icon icon="caret-right" /></button>
         </div>
     </div>
 </template>
@@ -92,12 +90,14 @@
 <script>
     import NPCTool from '@/components/NPCTool.vue';
     import Round from '@/components/Round.vue';
+    import Dice from '@/components/Dice.vue';
     import dao from "@/mixins/players-dao.js";
 
     export default {
         components: {
             NPCTool,
-            Round
+            Round,
+            Dice
         },
         data: function() {
             return {
@@ -109,7 +109,8 @@
                 playersLeft: [],
                 activePlayer: {},
                 starts: false,
-                npc: {}
+                npc: {},
+                showDice: false
             };
         },
         methods: {
@@ -203,6 +204,7 @@
             stopBattle () {
                 this.setDefaultAttributes();
                 this.players = this.clone(JSON.parse(this.$cookie.get('initPlayers')));
+                this.showDice = false;
                 this.starts = false;
             },
             userIsModified (player) {
@@ -277,6 +279,9 @@
                     output[key] = (typeof v === "object") ? this.clone(v) : v;
                 }
                 return output;
+            },
+            toggleDiceView () {
+                this.showDice = !this.showDice;
             }
         },
         beforeMount: function() {

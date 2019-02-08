@@ -4,7 +4,7 @@
             <div class="npcCreator">
                 <h1 class="display-4">
                     <font-awesome-icon icon="user" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'enemy'}" @click="selectTab('user')" /> 
-                    <font-awesome-icon v-if="players.length" icon="skull" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'user'}" @click="selectTab('enemy')" /> Add Player
+                    <font-awesome-icon icon="skull" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'user'}" @click="selectTab('enemy')" /> Add Player
                 </h1>
                 <div class="npcCreator__row">
                     <div class="npcCreator__col npcCreator__col--name"><input v-model="npc.name" class="form-control" type="text" placeholder="Name" /></div>
@@ -16,6 +16,9 @@
                     <div class="npcCreator__col">
                         <button class="btn / npcCreator__cta" :class="{'btn-primary': isValidNPC(), 'btn-secondary': !isValidNPC()}" @click="addNPC()" :disabled="!isValidNPC()">
                             <font-awesome-icon icon="plus" />
+                        </button>
+                        <button v-if="npcTab === 'enemy'" class="btn btn-success / npcCreator__cta" @click="setRandomNPC()">
+                            <font-awesome-icon icon="dice" />
                         </button>
                     </div>
                 </div>
@@ -41,7 +44,7 @@
             };
         },
         computed: {
-            playersProp: {
+            playersArray: {
                 get: function () {
                     return this.players;
                 },
@@ -62,14 +65,39 @@
                 this.npc = {};
                 this.npcTab = tab;
             },
+            getLastPlayerId () {
+                return !this.playersArray.length ? 1 : this.playersArray[this.playersArray.length -1].id + 1;
+            },
+            setRandomNPC() {
+                var npc = [
+                    // strong but slow
+                    {
+                        "id": this.getLastPlayerId(),
+                        "name": 'NPC Strong',
+                        "le": _.random(25, 35),
+                        "ini": _.random(12, 20),
+                        "at": _.random(8, 12),
+                        "pa": _.random(4, 7)
+                    }, 
+                    // weak but fast
+                    {
+                        "id": this.getLastPlayerId(),
+                        "name": 'NPC Weak',
+                        "le": _.random(20, 25),
+                        "ini": _.random(7, 11),
+                        "at": _.random(6, 8),
+                        "pa": _.random(4, 7)
+                    }
+                ];
+
+                this.npc = npc[_.random(0, 1)];
+            },
             addNPC () {
-                var players = this.playersProp;
                 var isEnemy = this.npcTab === 'enemy';
-                var npcCound = dao.filterPlayers(players, true).length + 1;
+                var npcCound = dao.filterPlayers(this.playersArray, true).length + 1;
                 var name = isEnemy ? (this.npc.name ? this.npc.name : "NPC") + " (" + npcCound + ")" : this.npc.name
-                var id = !players.length ? 1 : players[players.length -1].id + 1;
                 var npc = {
-                    "id": id,
+                    "id": this.getLastPlayerId(),
                     "name": name,
                     "npc": isEnemy,
                     "le": this.npc.le,
@@ -83,15 +111,15 @@
                     }
                 };
 
-                players.push(npc);
+                this.playersArray.push(npc);
 
-                players = _.sortBy(players, [function(player) { 
+                this.playersArray = _.sortBy(this.playersArray, [function(player) { 
                     return player.npc; 
                 }]);
 
                 if (!isEnemy) {
                     this.npc = {};
-                    this.$cookie.set('initPlayers', JSON.stringify(dao.filterPlayers(players)), 1);
+                    this.$cookie.set('initPlayers', JSON.stringify(dao.filterPlayers(this.playersArray)), 1);
                 }
 
                 return npc;
