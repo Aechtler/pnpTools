@@ -20,6 +20,10 @@
             <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
             <img alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
           </form>
+
+          <router-link to="/fight" tag="button" class="btn btn-success / about__cta">
+              Start Battle! <font-awesome-icon icon="dice-d20" />
+          </router-link>
         </div>
         <div class="about__col about__col--image">
           <a href="https://www.getshirts.de/index.php?page=artikel&id=434077#ansicht" target="_blank"><img src="../assets/tears-box.jpg" class="about__image" width="100%" /></a>

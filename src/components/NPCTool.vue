@@ -119,8 +119,9 @@
 
                 if (!isEnemy) {
                     this.npc = {};
-                    this.$cookie.set('initPlayers', JSON.stringify(dao.filterPlayers(this.playersArray)), 1);
                 }
+
+                this.$cookie.set('initPlayers', JSON.stringify(this.playersArray), 1);
 
                 return npc;
             }

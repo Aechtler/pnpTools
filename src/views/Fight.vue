@@ -41,7 +41,7 @@
                                         <font-awesome-icon icon="fist-raised" />
                                     </span>
                                 </div>
-                                <input class="form-control" type="number" v-model="player.fightAttributes.ini" aria-describedby="basic-addon1"/>
+                                <input class="form-control" type="number" :disabled="player.le == 0" v-model="player.fightAttributes.ini" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
             </button>
             <button v-if="!starts && hasPlayers(true)" type="button" class="btn btn-secondary" @click="removeAllNPC()"><font-awesome-icon icon="sync-alt" /></button>
 
-            <button v-if="starts" type="button" class="btn btn-secondary  / player-list-cta__option" @click="reset()"><font-awesome-icon icon="redo-alt" /></button>
+            <button v-if="starts" type="button" :disabled="roundCount === 1" class="btn btn-secondary  / player-list-cta__option" @click="reset()"><font-awesome-icon icon="redo-alt" /></button>
             <button v-if="starts" type="button" class="btn btn-secondary / player-list-cta__option" @click="stopBattle()"><font-awesome-icon icon="stop" /></button>
             <button v-if="starts" type="button" class="btn btn-success" :class="{'player-list-cta__dice': showDice}" @click="toggleDiceView()"><font-awesome-icon icon="dice" /></button>
             <Dice v-if="starts && showDice" />
@@ -192,12 +192,14 @@
                 return this.dao.filterPlayers(this.players, true).length;
             },
             updatePlayersCookie () {
-                this.$cookie.set('initPlayers', JSON.stringify(dao.filterPlayers(this.players)), 1);
+                this.$cookie.set('initPlayers', JSON.stringify(this.players), 1);
             },
             removeAllNPC () {
                 this.players = _.remove(this.players, function(player) {
                     return !player.npc;
                 });
+
+                this.updatePlayersCookie();
 
                 this.buPlayers = [];
             },
