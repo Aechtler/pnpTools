@@ -24,6 +24,7 @@
         }
 
         &--result {
+            cursor: default;
             position: relative;
             background-color: #e9ecef !important;
             border-color: #ced4da !important;
@@ -64,7 +65,7 @@
         transition: width 0.3s;
 
         &--show {
-            width: 25% !important;
+            width: 130px !important;
         }
 
         &__dice {

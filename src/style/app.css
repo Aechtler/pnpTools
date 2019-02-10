@@ -154,6 +154,7 @@
     .dice__dice--dicing {
       color: #333 !important; }
     .dice__dice--result {
+      cursor: default;
       position: relative;
       background-color: #e9ecef !important;
       border-color: #ced4da !important;
@@ -182,7 +183,7 @@
       width: 0;
       transition: width 0.3s; }
       .dice--show {
-        width: 25% !important; }
+        width: 130px !important; }
       .dice__dice:not(.dice__dice--result) {
         border-radius: 0 !important; } }
 
