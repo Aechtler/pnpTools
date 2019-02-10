@@ -189,7 +189,7 @@
                 });
             },
             hasPlayers (npc) {
-                return this.dao.filterPlayers(this.players, true).length;
+                return this.dao.filterPlayers(this.players, npc).length;
             },
             updatePlayersCookie () {
                 this.$cookie.set('initPlayers', JSON.stringify(this.players), 1);
@@ -223,28 +223,20 @@
                 switch(status) {
                     case 'isNPCActive':
                         return isPlayerNPC && isPlayerAlive;
-                        break;
                     case 'isPlayerDead':
                         return !isPlayerAlive;
-                        break;
                     case 'isPlayerInLine':
                         return !isPlayerNPC && isPlayerActive && isPlayerAlive && !isPlayerHurt;
-                        break;
                     case 'isHurtPlayerInLine':
                         return !isPlayerNPC && isPlayerActive && isPlayerAlive && isPlayerHurt;
-                        break;
                     case 'isPlayerNotInLine':
                         return !isPlayerNPC && !isPlayerActive && isPlayerAlive && !isPlayerHurt;
-                        break;
                     case 'isHurtPlayerNotInLine':
                         return !isPlayerNPC && !isPlayerActive && isPlayerAlive && isPlayerHurt;
-                        break;
                     case 'isPlayerActive':
                         return isPlayerActive;
-                        break;
                     case 'isPlayerAlive':
                         return isPlayerAlive;
-                        break;
                     default:
                         return false;
                 }
