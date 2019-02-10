@@ -26,22 +26,22 @@
         methods: {
             dice (dice) {
                 var self = this;
-                var i = 0;
+                var count = 1;
 
                 this.diceDone = false;
                 this.usedDice = dice;
 
-                while (i < 10) {
+                while (count < _.random(7, 10)) {
                     setTimeout(function () {
                         self.dicedNumber = _.random(1, dice);
-                    }, 100*i );
+                    }, 100 * count );
 
-                    i++;
+                    count++;
                 }
 
                 setTimeout(function () {
                     self.diceDone = true;
-                }, 1000 );
+                }, count * 100 );
             },
             hasDiced6Number(number) {
                 return this.usedDice === 6 && this.dicedNumber === number;
