@@ -8,10 +8,10 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSkullCrossbones, faPlus, faSkull, faFlag, faUser, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken, faUserInjured, faDiceD20, faDice, faDiceD6} from '@fortawesome/free-solid-svg-icons'
+import { faSkullCrossbones, faPlus, faSkull, faFlag, faUser, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken, faUserInjured, faDiceD20, faDice, faDiceD6, faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faPlus, faSkull, faFlag, faUser, faSkullCrossbones, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken, faUserInjured, faDiceD20, faDice, faDiceD6)
+library.add(faPlus, faSkull, faFlag, faUser, faSkullCrossbones, faHeart, faUserTimes, faRedoAlt, faFistRaised, faStop, faCaretRight, faSyncAlt, faHeartBroken, faUserInjured, faDiceD20, faDice, faDiceD6, faDiceOne, faDiceTwo, faDiceThree, faDiceFour, faDiceFive, faDiceSix)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueCookie);

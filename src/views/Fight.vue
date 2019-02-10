@@ -60,7 +60,7 @@
                                         <font-awesome-icon icon="heart-broken" v-if="player.le == 0" />
                                     </span>
                                 </div>
-                                <input :disabled="!starts" class="form-control" type="number" v-model="player.le" v-on:keyup="updatePlayersCookie()" aria-describedby="basic-addon1"/>
+                                <input class="form-control" type="number" v-model="player.le" v-on:keyup="updatePlayersCookie()" aria-describedby="basic-addon1"/>
                             </div>
                         </div>
                     </div>
@@ -73,16 +73,16 @@
         </div>
         
         <div class="player-list-cta" v-if="players.length">
-            <button v-if="!starts" type="button" class="btn" :class="{'btn-primary': players.length > 1, 'btn-secondary': players.length <= 1}" @click="startBattle()" :disabled="players.length < 2">
+            <button v-if="!starts" type="button" class="btn / player-list-cta__button" :class="{'btn-primary': players.length > 1, 'btn-secondary': players.length <= 1}" @click="startBattle()" :disabled="players.length < 2">
                 Start Battle! <font-awesome-icon icon="dice-d20" />
             </button>
-            <button v-if="!starts && hasPlayers(true)" type="button" class="btn btn-secondary" @click="removeAllNPC()"><font-awesome-icon icon="sync-alt" /></button>
+            <button v-if="!starts && hasPlayers(true)" type="button" class="btn btn-secondary / player-list-cta__button" @click="removeAllNPC()"><font-awesome-icon icon="sync-alt" /></button>
 
-            <button v-if="starts" type="button" :disabled="roundCount === 1" class="btn btn-secondary  / player-list-cta__option" @click="reset()"><font-awesome-icon icon="redo-alt" /></button>
-            <button v-if="starts" type="button" class="btn btn-secondary / player-list-cta__option" @click="stopBattle()"><font-awesome-icon icon="stop" /></button>
-            <button v-if="starts" type="button" class="btn btn-success" :class="{'player-list-cta__dice': showDice}" @click="toggleDiceView()"><font-awesome-icon icon="dice" /></button>
-            <Dice v-if="starts && showDice" />
-            <button v-if="starts" type="button" class="btn btn-primary" @click="nextRound(true)">Next <font-awesome-icon icon="caret-right" /></button>
+            <button v-if="starts" type="button" :disabled="roundCount === 1" class="btn btn-secondary / player-list-cta__option player-list-cta__button" @click="reset()"><font-awesome-icon icon="redo-alt" /></button>
+            <button v-if="starts" type="button" class="btn btn-secondary / player-list-cta__option player-list-cta__button" @click="stopBattle()"><font-awesome-icon icon="stop" /></button>
+            <button v-if="starts" type="button" class="btn btn-success / player-list-cta__dice" :class="{'player-list-cta__dice--active': showDice}" @click="toggleDiceView()"><font-awesome-icon icon="dice" /></button>
+            <Dice v-if="starts" :class="{'dice--show': showDice}" />
+            <button v-if="starts" type="button" class="btn btn-primary / player-list-cta__button" @click="nextRound(true)">Next <font-awesome-icon icon="caret-right" /></button>
         </div>
     </div>
 </template>

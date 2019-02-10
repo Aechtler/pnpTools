@@ -1,13 +1,10 @@
 .dice {
-    width: span(3 of 12);
+    overflow: hidden;
+    display: flex;
     margin-right: 10px;
 
     &__dice {
         cursor: pointer;
-
-        &:not(:first-child) {
-            margin-left: 10px;
-        }
 
         &--d6 {
             color: #28a745;
@@ -16,11 +13,34 @@
         &--d20 {
             color: #28a745;
         }
+
+        &:focus {
+            box-shadow: none !important;
+        }
+    }
+
+    &__result {
+        text-align: center;
     }
 
     @media only screen and (max-width: 768px) {
+        height: 0;
         width: span(12 of 12);
         margin-bottom: 20px;
+
+        &--show {
+            height: 100% !important;
+        }
+
+        &__dice {
+            &:not(:first-child) {
+                margin-left: 2%;
+            }
+        }
+
+        &__result {
+            margin-left: 2%;
+        }
 
         .input-group-text {
             font-size: 150%;
@@ -32,9 +52,15 @@
     }
 
     @media only screen and (min-width: 769px) {
-        .input-group-text {
-            border-bottom-left-radius: 0 !important;
-            border-top-left-radius: 0 !important;
+        width: 0;
+        transition: width 0.3s;
+
+        &--show {
+            width: 25% !important;
+        }
+
+        &__dice {
+            border-radius: 0 !important;
         }
     }
 }

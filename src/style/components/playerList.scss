@@ -80,6 +80,15 @@
         }
     }
 
+    &-cta {
+        &__dice {
+            &--active {
+                background-color: #1e7e34 !important;
+                border-color: #1c7430 !important;
+            }
+        }
+    }
+
     @media only screen and (max-width: 768px) {
         &__title {
            margin-bottom: 20px; 
@@ -89,6 +98,10 @@
             .btn {
                 width: span(12 of 12);
                 margin-bottom: 10px;
+            }
+
+            &__dice {
+
             }
 
             &__option {
@@ -149,14 +162,26 @@
         &-cta {
             display: flex;
 
-            .btn {
+            &__button, &__dice {
                 margin-right: 10px;
             }
 
             &__dice {
+                transition: width 2s;
+                margin-right: 0 !important;
                 border-bottom-right-radius: 0 !important;
                 border-top-right-radius: 0 !important;
-                margin-right: 0 !important;
+
+                &--active {
+                    background-color: #1e7e34 !important;
+                    border-color: #1c7430 !important;
+                }
+
+                &:hover {
+                    +.dice {
+                        width: 1%;
+                    }
+                }
 
                 &:focus {
                     box-shadow: none !important;
