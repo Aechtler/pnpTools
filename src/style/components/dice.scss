@@ -6,21 +6,41 @@
     &__dice {
         cursor: pointer;
 
-        &--d6 {
-            color: #28a745;
-        }
-
-        &--d20 {
-            color: #28a745;
+        &--d6, &--d20 {
+            color: #effff2 !important;
         }
 
         &:focus {
             box-shadow: none !important;
         }
-    }
 
-    &__result {
-        text-align: center;
+        &--done {
+            color: black !important;
+            font-weight: bold !important;
+        }
+
+        &--dicing {
+            color: #333 !important;
+        }
+
+        &--result {
+            position: relative;
+            background-color: #e9ecef !important;
+            border-color: #ced4da !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+            width: 50px;
+
+            svg {
+                font-size: 150%;
+                margin: auto;
+                position: absolute;
+                top: 0; 
+                left: 0; 
+                bottom: 0; 
+                right: 0;
+            }
+        }
     }
 
     @media only screen and (max-width: 768px) {
@@ -37,18 +57,6 @@
                 margin-left: 2%;
             }
         }
-
-        &__result {
-            margin-left: 2%;
-        }
-
-        .input-group-text {
-            font-size: 150%;
-
-            &:not(:first-child) {
-                margin-left: 30px;
-            }
-        }
     }
 
     @media only screen and (min-width: 769px) {
@@ -60,7 +68,9 @@
         }
 
         &__dice {
-            border-radius: 0 !important;
+            &:not(&--result) {
+                border-radius: 0 !important;
+            }
         }
     }
 }
