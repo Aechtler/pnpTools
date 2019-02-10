@@ -9,6 +9,7 @@
         display: flex;
         flex-direction: row;
         padding: 10px;
+        transition: background-color 0.5s;
 
         &--npc {
             .player-list-player__col--name {
@@ -81,6 +82,8 @@
     }
 
     &-cta {
+        padding-bottom: 20px;
+
         &__dice {
             &--active {
                 background-color: #1e7e34 !important;
