@@ -8,11 +8,11 @@
                 </h1>
                 <div class="npcCreator__row">
                     <div class="npcCreator__col npcCreator__col--name"><input v-model="npc.name" class="form-control" type="text" placeholder="Name" /></div>
-                    <div class="npcCreator__col" v-if="npcTab === 'user'"><input v-model.number="npc.kk" class="form-control" type="number" placeholder="KK" /></div>
-                    <div class="npcCreator__col" v-if="npcTab === 'enemy'"><input v-model.number="npc.at" class="form-control" type="number" min="1" max="19" placeholder="AT" /></div>
-                    <div class="npcCreator__col" v-if="npcTab === 'enemy'"><input v-model.number="npc.pa" class="form-control" type="number" min="1" max="19" placeholder="PA" /></div>
-                    <div class="npcCreator__col"><input v-model.number="npc.ini" class="form-control" type="number" min="1" max="99" placeholder="INI" /></div>
-                    <div class="npcCreator__col"><input v-model.number="npc.le" class="form-control" type="number" min="1" max="999" placeholder="LE" /></div>
+                    <div class="npcCreator__col" v-if="npcTab === 'user'" data-placeholder="KK"><input v-model.number="npc.kk" class="form-control" type="number" /></div>
+                    <div class="npcCreator__col" v-if="npcTab === 'enemy'" data-placeholder="AT"><input v-model.number="npc.at" class="form-control" type="number" min="1" max="19"/></div>
+                    <div class="npcCreator__col" v-if="npcTab === 'enemy'" data-placeholder="PA"><input v-model.number="npc.pa" class="form-control" type="number" min="1" max="19" /></div>
+                    <div class="npcCreator__col" data-placeholder="INI"><input v-model.number="npc.ini" class="form-control" type="number" min="1" max="99" /></div>
+                    <div class="npcCreator__col" data-placeholder="LE"><input v-model.number="npc.le" class="form-control" type="number" min="1" max="999" /></div>
                     <div class="npcCreator__col">
                         <button class="btn / npcCreator__cta" :class="{'btn-primary': isValidNPC(), 'btn-secondary': !isValidNPC()}" @click="addNPC()" :disabled="!isValidNPC()">
                             <font-awesome-icon icon="plus" />

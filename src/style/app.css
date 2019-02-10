@@ -118,10 +118,21 @@
   flex-direction: row; }
 
 .npcCreator__col {
+  position: relative;
   width: 15.2542372881%;
   padding-right: 10px; }
   .npcCreator__col--name {
     width: 23.7288135593%; }
+  .npcCreator__col::after {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    opacity: 0.3;
+    font-size: 80%; }
+  .npcCreator__col:not(.npcCreator__col--name) .form-control {
+    padding-left: 30px !important; }
 
 .npcCreator__cta:not(:first-child) {
   margin-left: 4px; }

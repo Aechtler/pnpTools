@@ -14,11 +14,28 @@
     }
 
     &__col {
+        position: relative;
         width: span(2 of 12);
         padding-right: 10px;
 
         &--name {
             width: span(3 of 12);
+        }
+
+        &::after {
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            content: attr(data-placeholder);
+            pointer-events: none;
+            opacity: 0.3;
+            font-size: 80%;
+        }
+
+        &:not(&--name) {
+            .form-control {
+                padding-left: 30px !important;
+            }
         }
     }
 
