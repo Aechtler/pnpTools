@@ -20,13 +20,17 @@
             return {
                 usedDice: null,
                 dicedNumber: null,
-                diceDone: false,
+                diceDone: true,
             };
         },
         methods: {
             dice (dice) {
                 var self = this;
                 var count = 1;
+
+                if (!this.diceDone) {
+                    return false;
+                }
 
                 this.diceDone = false;
                 this.usedDice = dice;

@@ -1,6 +1,7 @@
 .npcCreator {
     &__tab {
         cursor: pointer;
+        transition: color 0.3s;
         
         &--inactive {
             color: #c1c1c1 !important;
@@ -53,6 +54,10 @@
         &__col {
             width: span(12 of 12);
             margin-bottom: 10px;
+        }
+
+        &__title {
+            font-size: 3.0rem !important;
         }
 
         &__cta {

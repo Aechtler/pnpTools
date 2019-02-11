@@ -3,7 +3,7 @@
     <router-view/>
     <div id="nav" class="pnp-nav">
       <router-link to="/">About</router-link> |
-      <router-link to="/fight">Battle</router-link>
+      <router-link to="/fight">Fight</router-link>
     </div>
   </div>
 </template>

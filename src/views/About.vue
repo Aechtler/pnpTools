@@ -13,7 +13,7 @@
           <p>Ich verfolge keine kommerziellen Zwecke oder sammle teuflisch eure Daten - Ne, eigentlich war das Tool nur für mich gedacht und jetzt könnt ihr es auch nutzen. For Free - ohne Werbung - und sowas...</p>
           <p>Viel Spaß - Euer Mark Aechtler</p>
           <router-link to="/fight" tag="button" class="btn btn-success / about__cta">
-              Start Battle! <font-awesome-icon icon="dice-d20" />
+             Los gehts!
           </router-link>
         </div>
         <div class="about__col about__col--image">

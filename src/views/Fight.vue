@@ -18,7 +18,7 @@
                             <font-awesome-icon v-if="checkStatus('isPlayerNotInLine', player)" icon="user" />
                             <font-awesome-icon v-if="checkStatus('isPlayerInLine', player)" icon="user" />
                             <font-awesome-icon v-if="checkStatus('isHurtPlayerNotInLine', player)" icon="user-injured" />
-                             <font-awesome-icon v-if="checkStatus('isHurtPlayerInLine', player)" icon="user-injured" />
+                            <font-awesome-icon v-if="checkStatus('isHurtPlayerInLine', player)" icon="user-injured" />
                             <font-awesome-icon v-if="checkStatus('isPlayerDead', player)" icon="skull-crossbones" />
                         </div>
                     </div>
@@ -74,7 +74,7 @@
         
         <div class="player-list-cta" v-if="players.length">
             <button v-if="!starts" type="button" class="btn / player-list-cta__button" :class="{'btn-primary': players.length > 1, 'btn-secondary': players.length <= 1}" @click="startBattle()" :disabled="players.length < 2">
-                Start Battle! <font-awesome-icon icon="dice-d20" />
+                Start Fight! <font-awesome-icon icon="dice-d20" />
             </button>
             <button v-if="!starts && hasPlayers(true)" type="button" class="btn btn-secondary / player-list-cta__button" @click="removeAllNPC()"><font-awesome-icon icon="sync-alt" /></button>
 
@@ -132,7 +132,7 @@
             },
             getActivePlayer () {
                 if (this.playersLeft.length){
-                    this.activePlayer = this.playersLeft.pop();
+                    this.activePlayer = this.playersLeft.shift();
 
                     if (this.activePlayer.le == 0) {
                         this.nextRound();
@@ -166,7 +166,7 @@
                     }]);
                 this.playersLeft = sortedPlayers;
 
-                return sortedPlayers.pop();
+                return sortedPlayers.shift();
             },
             setDefaultAttributes () {
                 this.iniRoundCount = 1;

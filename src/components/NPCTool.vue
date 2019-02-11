@@ -2,7 +2,7 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="npcCreator">
-                <h1 class="display-4">
+                <h1 class="display-4 / npcCreator__title">
                     <font-awesome-icon icon="user" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'enemy'}" @click="selectTab('user')" /> 
                     <font-awesome-icon icon="skull" class="npcCreator__tab" :class="{'npcCreator__tab--inactive': npcTab === 'user'}" @click="selectTab('enemy')" /> Add Player
                 </h1>
@@ -112,11 +112,7 @@
                 };
 
                 this.playersArray.push(npc);
-
-                this.playersArray = _.sortBy(this.playersArray, [function(player) { 
-                    return player.npc; 
-                }]);
-
+                
                 if (!isEnemy) {
                     this.npc = {};
                 }
